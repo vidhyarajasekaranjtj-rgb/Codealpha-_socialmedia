@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Register · MiniSocial</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header>
+  <a class="logo" href="/">MiniSocial</a>
+  <nav id="auth-area"></nav>
+</header>
+<main>
+  <form class="auth-form" id="register-form">
+    <h2>Create Account</h2>
+    <div id="message-area"></div>
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password (min 6 chars)" minlength="6" required>
+    <textarea id="bio" placeholder="Short bio (optional)" rows="3"></textarea>
+    <button class="btn" type="submit">Register</button>
+    <p>Already have an account? <a href="/login.html">Log in</a></p>
+  </form>
+</main>
+<script src="/js/common.js"></script>
+<script>
+document.getElementById('register-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  try {
+    await api('/api/register', {
+      method: 'POST',
+      body: JSON.stringify({
+        username: document.getElementById('username').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
+        bio: document.getElementById('bio').value
+      })
+    });
+    window.location.href = '/';
+  } catch (err) {
+    document.getElementById('message-area').innerHTML = `<div class="message error">${err.message}</div>`;
+  }
+});
+</script>
+</body>
+</html>

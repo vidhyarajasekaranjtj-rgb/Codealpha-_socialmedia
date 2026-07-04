@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Log In · MiniSocial</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header>
+  <a class="logo" href="/">MiniSocial</a>
+  <nav id="auth-area"></nav>
+</header>
+<main>
+  <form class="auth-form" id="login-form">
+    <h2>Log In</h2>
+    <div id="message-area"></div>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button class="btn" type="submit">Log In</button>
+    <p>No account? <a href="/register.html">Register here</a></p>
+  </form>
+</main>
+<script src="/js/common.js"></script>
+<script>
+document.getElementById('login-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  try {
+    await api('/api/login', {
+      method: 'POST',
+      body: JSON.stringify({
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value
+      })
+    });
+    window.location.href = '/';
+  } catch (err) {
+    document.getElementById('message-area').innerHTML = `<div class="message error">${err.message}</div>`;
+  }
+});
+</script>
+</body>
+</html>

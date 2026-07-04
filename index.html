@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MiniSocial</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header>
+  <a class="logo" href="/">MiniSocial</a>
+  <nav id="auth-area"></nav>
+</header>
+
+<main>
+  <div class="composer" id="composer" style="display:none">
+    <textarea id="post-content" placeholder="What's on your mind?"></textarea>
+    <div class="composer-footer">
+      <button class="btn" id="post-btn">Post</button>
+    </div>
+  </div>
+  <div id="message-area"></div>
+  <div id="feed">Loading feed...</div>
+</main>
+
+<script src="/js/common.js"></script>
+<script src="/js/posts.js"></script>
+<script src="/js/feed.js"></script>
+</body>
+</html>
